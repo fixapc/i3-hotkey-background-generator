@@ -10,18 +10,20 @@ bindsym XF86AudioLowerVolume exec   	 --no-startup-id pactl set-sink-volume @DEF
 bindsym XF86AudioMute exec          	 --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec       	 --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 #CUSTOM I3 APPLICATION COMMANDS AND STARTUPS
-exec                                	 --no-startup-id stterm tmuxp load ~/.tmuxsession.yaml -y                                                                        	 # Starts tmuxp session launcher 
+exec                                	 --no-startup-id autoi3hotkeybg                                                                                                 	 # Starts autoi3hotkeybg
+exec                                	 --no-startup-id stterm tmuxp load ~/.tmuxsession.yaml -y                                                                        	 # Starts tmuxp session launcher
 exec                                	 --no-startup-id pipewire                                                                                                        	 # Starts tmux
 exec                                	 --no-startup-id pipewire-pulse                                                                                                      # Starts tmux
 exec                                	 --no-startup-id wireplumber                                                                                                     	 # Starts pipewire session handler
 exec                                	 --no-startup-id dbus-launch                                                                                                     	 # Starts dbus session handler
+exec                                	 --no-startup-id easyeffects                                                                                                     	 # STARTS easyeffects
 exec                                	 --no-startup-id sudo xset r rate 250 75                                                                                         	 # Set Keyboard rate
 exec                                	 --no-startup-id sudo xset s off                                                                                                 	 # Disable screen power management
 exec                                	 --no-startup-id sudo xset s noblank                                                                                             	 # Disable screen power management
 exec                                	 --no-startup-id sudo xset -dpms                                                                                                 	 # Disable screen power management
 exec                                	 --no-startup-id sudo xset dpms 0 0 0                                                                                            	 # Disable screen power management
 exec                                	 --no-startup-id -i net0 -p 4011 -u                                                                                              	 # Starts scream audio listener on port 4011 net0
-exec                                	 --no-startup-id feh --bg-scale /home/usr/.config/i3/i3hotkeybackground.png                                                      	 # Saves generated i3 background to i3 config folder
+exec                                	 --no-startup-id feh --bg-scale -- /home/usr/.config/i3/i3hotkeybackground.png                                                       # Saves generated i3 background to i3 config folder
 exec                                	 --no-startup-id nextcloud                                                                                                       	 # Start nextcloud deskclient
 exec                                	 --no-startup-id ksnip                                                                                                           	 # Starts the best screenshot utility currently for Linux
 exec                                	 --no-startup-id obs                                                                                                             	 # Starts OBS screen recording client
@@ -47,103 +49,184 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-#CUSTOM HOTKEY CONFIGURATIONS FOR I3
-bindsym $mod+d exec                 	 --no-startup-id rofi -columns 2 -show drun                                                                                      	 #I3BACKGROUNDGENERATOR:Start application launcher as session user
-bindsym $mod+Shift+d exec           	 --no-startup-id sudo rofi -columns 2 -show drun                                                                                 	 #I3BACKGROUNDGENERATOR:Start application launcher as root user
-#CUSTOM HOTKEY CONFIGURATIONS FOR I3 - START APPS
-bindsym $mod+m exec                 	 --no-startup-id locate / | rofi -fullscreen -columns 2 -dmenu -threads -1 -i -p "locate:" | xargs -r -0 xdg-open                	 #I3BACKGROUNDGENERATOR:Start file search open as user
-bindsym $mod+shift+m exec           	 --no-startup-id sudo locate / | sudo rofi -fullscreen -columns 1 -dmenu -threads -1 -i -p "locate:" | sudo xargs -r -0 xdg-open 	 #I3BACKGROUNDGENERATOR:Start file search open as root
-bindsym $alt+Ctrl+Shift+s exec      	 --no-startup-id sudo subl                                                                                                       	 #I3BACKGROUNDGENERATOR:Start sublime ide as root
-bindsym $alt+Ctrl+s exec            	 --no-startup-id subl                                                                                                            	 #I3BACKGROUNDGENERATOR:Start sublime ide as current session user
-bindsym $mod+Ctrl+Shift+h exec      	 --no-startup-id sudo subl /etc/hosts                                                                                            	 #I3BACKGROUNDGENERATOR:Edit hosts file as root with sublime text
-bindsym $mod+Ctrl+Shift+j exec      	 --no-startup-id sudo subl /etc/default/grub                                                                                     	 #I3BACKGROUNDGENERATOR:Edit default grub configuration as root
-bindsym $mod+Ctrl+f exec            	 --no-startup-id nautilus                                                                                                        	 #I3BACKGROUNDGENERATOR:Start filemanager nautilus as session user
-bindsym $mod+Ctrl+Shift+f exec      	 --no-startup-id nautilus                                                                                                        	 #I3BACKGROUNDGENERATOR:Start filemanager nautilus as root
-bindsym $mod+Ctrl+z exec            	 --no-startup-id sudo zenmap                                                                                                     	 #I3BACKGROUNDGENERATOR:Start zenmap GUI nmap based port scanner as root
-bindsym $mod+Ctrl+v exec            	 --no-startup-id xdotool click --repeat 1000000000 --delay 200 1                                                                 	 #I3BACKGROUNDGENERATOR:Start autoclicker for left mouse button
-bindsym $mod+Ctrl+Shift+v exec      	 --no-startup-id killall xdotool -9                                                                                              	 #I3BACKGROUNDGENERATOR:Stop autoclicker
-bindsym $mod+Ctrl+p exec            	 --no-startup-id sudo keepass                                                                                                    	 #I3BACKGROUNDGENERATOR:Edit bashrc as root
-bindsym $mod+Ctrl+n exec            	 --no-startup-id subl /mnt/fixapc.net/mnt/nextcloud/fixapc/files/EVERYTHING/STA/HWTS/Important_Notes                             	 #I3BACKGROUNDGENERATOR:Open important notes as session user
-bindsym $mod+Ctrl+Shift+g exec      	 --no-startup-id sudo gparted                                                                                                    	 #I3BACKGROUNDGENERATOR:Start gparted as root
-bindsym $mod+Ctrl+9 exec            	 --no-startup-id sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf                                         	                                                                                            	 #I3BACKGROUNDGENERATOR:Start wpa_supplicant as root
-bindsym $mod+Ctrl+0 exec            	 --no-startup-id sudo killall wpa_supplicant -9                                                                                  	 #I3BACKGROUNDGENERATOR:Stop wpa_supplicant as root
-bindsym $mod+Ctrl+h exec            	 --no-startup-id stterm "htop"                                                                                                   	 #I3BACKGROUNDGENERATOR:Start htop in st terminal
-bindsym $mod+u exec --no-startup-id google-chrome https://www.ebay.com/sh/lst/drafts & google-chrome https://www.ebay.com/sh/lst/active & google-chrome https://www.ebay.com/sh/lst/ended?status=UNSOLD_NOT_RELISTED & google-chrome https://www.ebay.com/sh/lst/drafts
-#CUSTOM HOTKEY CONFIGURATIONS FOR I3 - CONFIGS
-bindsym $mod+Ctrl+s exec            	 --no-startup-id sudo subl $HOME/.bashrc                                                                                         	 #I3BACKGROUNDGENERATOR:Edit local bashrc as session usr
-bindsym $mod+n exec                 	 --no-startup-id sudo subl $HOME/.ssh/known_hosts                                                                                	 #I3BACKGROUNDGENERATOR:Edit local known_hosts file as root
-bindsym $mod+Ctrl+Shift+w exec      	 --no-startup-id sudo subl /etc/wpa_supplicant/wpa_supplicant.conf                                                               	 #I3BACKGROUNDGENERATOR:Edit wpa_supplicant.conf as root
-bindsym $mod+Ctrl+i exec            	 --no-startup-id subl /home/usr/.config/i3/config                                                                                	 #I3BACKGROUNDGENERATOR:Edit i3 config as session user
-bindsym $mod+Ctrl+Shift+n exec      	 --no-startup-id sudo subl /mnt/fixapcserver/etc/nginx/nginx.conf                                                                	 #I3BACKGROUNDGENERATOR:Edit nginx configuration as root
-#CUSTOM HOTKEY CONFIGURATIONS FOR I3 - HTTPS
-bindsym $mod+Ctrl+1 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.11/                                                                 	 #I3BACKGROUNDGENERATOR:Open KVM switch in Google-chrome
-bindsym $mod+Ctrl+2 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.9/                                                                  	 #I3BACKGROUNDGENERATOR:Open Idrac http for primary server
-bindsym $mod+Ctrl+3 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.12:1323/                                                            	 #I3BACKGROUNDGENERATOR:Open Idrac http for Drive wiper server
-bindsym $mod+Ctrl+4 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.14:1223/                                                            	 #I3BACKGROUNDGENERATOR:Open Idarac http for DEV server
-bindsym $mod+Ctrl+5 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.30/                                                                 	 #I3BACKGROUNDGENERATOR:Open local client in Google-chrome
-bindsym $mod+Ctrl+c exec            	 --no-startup-id google-chrome --new-window                                                                                      	 #I3BACKGROUNDGENERATOR:Start Google-chrome in a new window
-bindsym $mod+Ctrl+y exec            	 --no-startup-id google-chrome --new-window https://youtube.com                                                                  	 #I3BACKGROUNDGENERATOR:Start youtube in google chrome
-bindsym $mod+Ctrl+Shift+q exec      	 --no-startup-id google-chrome --new-window https://www.paypal.com/shiplabel/create/                                             	 #I3BACKGROUNDGENERATOR:Launch paypal create shipping label in Google Chrome
-bindsym $mod+Ctrl+a exec            	 --no-startup-id google-chrome --new-window https://app.asana.com/                                                               	 #I3BACKGROUNDGENERATOR:Open assan in Google-chrome
-bindsym $mod+Ctrl+g exec            	 --no-startup-id google-chrome --new-window https://mail.google.com/mail/u/0/#inbox                                              	 #I3BACKGROUNDGENERATOR:Open gmail in Google-chrome
-bindsym $mod+Ctrl+q exec            	 --no-startup-id google-chrome --new-window https://www.paypal.com/invoice/manage                                                	 #I3BACKGROUNDGENERATOR:Open paypal invoices in Google-chrome
-#CUSTOM HOTKEY CONFIGURATIONS FOR I3 - VNCS
-bindsym $alt+Ctrl+1 exec            	 --no-startup-id stterm vncviewer 77.77.77.9:5900                                                                                	 #I3BACKGROUNDGENERATOR:Start vncviewer for primary server
-bindsym $alt+Ctrl+2 exec            	 --no-startup-id stterm vncviewer 77.77.77.12:5900                                                                               	 #I3BACKGROUNDGENERATOR:Start vncviewer for primary server
-bindsym $alt+Ctrl+3 exec            	 --no-startup-id stterm vncviewer 77.77.77.14:5900                                                                               	 #I3BACKGROUNDGENERATOR:Start vncviewer for primary server
-#DEFAULT HOTKEY CONFIGURATIONS FOR I3
+#I3BACKGROUNDGENERATORpage1:START TERMINAL WITH CURRENT SESSION USER
+bindsym $mod+Return exec            	 --no-startup-id stterm
+#I3BACKGROUNDGENERATORpage1:START TERMINAL AS ROOT USER
+bindsym $mod+Shift+Return exec      	 --no-startup-id sudo stterm
+#I3BACKGROUNDGENERATORpage1:START TMUXP SESSION LAUNCHER
+bindsym $mod+Ctrl+Shift+Return exec 	 --no-startup-id stterm tmuxp load ~/.tmuxsession.yaml -y
+#I3BACKGROUNDGENERATORpage1:START APPLICATION LAUNCHER AS SESSION USER
+bindsym $mod+d exec                 	 --no-startup-id rofi -columns 2 -show drun
+#I3BACKGROUNDGENERATORpage1:START APPLICATION LAUNCHER AS ROOT USER
+bindsym $mod+Shift+d exec           	 --no-startup-id sudo rofi -columns 2 -show drun
+#I3BACKGROUNDGENERATORpage1:START FILE SEARCH OPEN AS USER
+bindsym $mod+m exec                 	 --no-startup-id locate / | rofi -fullscreen -columns 2 -dmenu -threads -1 -i -p "locate:" | xargs -r -0 xdg-open
+#I3BACKGROUNDGENERATORpage1:START FILE SEARCH OPEN AS ROOT
+bindsym $mod+shift+m exec           	 --no-startup-id sudo locate / | sudo rofi -fullscreen -columns 1 -dmenu -threads -1 -i -p "locate:" | sudo xargs -r -0 xdg-open
+#I3BACKGROUNDGENERATORpage1:START SUBLIME IDE AS ROOT
+bindsym $alt+Ctrl+Shift+s exec      	 --no-startup-id sudo subl
+#I3BACKGROUNDGENERATORpage1:START SUBLIME IDE AS CURRENT SESSION USER
+bindsym $alt+Ctrl+s exec            	 --no-startup-id subl
+#I3BACKGROUNDGENERATORpage1:EDIT HOSTS FILE AS ROOT WITH SUBLIME TEXT
+bindsym $mod+Ctrl+Shift+h exec      	 --no-startup-id sudo subl /etc/hosts
+#I3BACKGROUNDGENERATORpage1:EDIT DEFAULT GRUB CONFIGURATION AS ROOT
+bindsym $mod+Ctrl+Shift+j exec      	 --no-startup-id sudo subl /etc/default/grub
+#I3BACKGROUNDGENERATORpage1:START FILEMANAGER NAUTILUS AS SESSION USER
+bindsym $mod+Ctrl+f exec            	 --no-startup-id nautilus
+#I3BACKGROUNDGENERATORpage1:START FILEMANAGER NAUTILUS AS ROOT
+bindsym $mod+Ctrl+Shift+f exec      	 --no-startup-id nautilus
+#I3BACKGROUNDGENERATORpage1:START ZENMAP GUI NMAP BASED PORT SCANNER AS ROOT
+bindsym $mod+Ctrl+z exec            	 --no-startup-id sudo zenmap
+#I3BACKGROUNDGENERATORpage1:START AUTOCLICKER FOR LEFT MOUSE BUTTON
+bindsym $mod+Ctrl+v exec            	 --no-startup-id xdotool click --repeat 1000000000 --delay 200 1
+#I3BACKGROUNDGENERATORpage1:STOP AUTOCLICKER
+bindsym $mod+Ctrl+Shift+v exec      	 --no-startup-id killall xdotool -9
+#I3BACKGROUNDGENERATORpage1:EDIT BASHRC AS ROOT
+bindsym $mod+Ctrl+p exec            	 --no-startup-id sudo keepass
+#I3BACKGROUNDGENERATORpage1:OPEN IMPORTANT NOTES AS SESSION USER
+bindsym $mod+Ctrl+n exec            	 --no-startup-id subl /mnt/fixapc.net/mnt/nextcloud/fixapc/files/EVERYTHING/STA/HWTS/Important_Notes
+#I3BACKGROUNDGENERATORpage1:START GPARTED AS ROOT
+bindsym $mod+Ctrl+Shift+g exec      	 --no-startup-id sudo gparted
+#I3BACKGROUNDGENERATORpage1:START WPA_SUPPLICANT USING THE WPA_SUPPLICANT CONFIG
+bindsym $mod+Ctrl+9 exec            	 --no-startup-id sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+#I3BACKGROUNDGENERATORpage1:STOP WPA_SUPPLICANT AS ROOT
+bindsym $mod+Ctrl+0 exec            	 --no-startup-id sudo killall wpa_supplicant -9
+#I3BACKGROUNDGENERATORpage1:START HTOP IN ST TERMINAL
+bindsym $mod+Ctrl+h exec            	 --no-startup-id stterm "htop"
+#I3BACKGROUNDGENERATORpage1:EDIT LOCAL BASHRC AS SESSION USR
+bindsym $mod+Ctrl+s exec            	 --no-startup-id sudo subl $HOME/.bashrc
+#I3BACKGROUNDGENERATORpage1:EDIT LOCAL KNOWN_HOSTS FILE AS ROOT
+bindsym $mod+n exec                 	 --no-startup-id sudo subl $HOME/.ssh/known_hosts
+#I3BACKGROUNDGENERATORpage1:EDIT WPA_SUPPLICANT.CONF AS ROOT
+bindsym $mod+Ctrl+Shift+w exec      	 --no-startup-id sudo subl /etc/wpa_supplicant/wpa_supplicant.conf
+#I3BACKGROUNDGENERATORpage1:EDIT I3 CONFIG AS SESSION USER
+bindsym $mod+Ctrl+i exec            	 --no-startup-id subl /home/usr/.config/i3/config
+#I3BACKGROUNDGENERATORpage1:EDIT NGINX CONFIGURATION AS ROOT
+bindsym $mod+Ctrl+Shift+n exec      	 --no-startup-id sudo subl /mnt/fixapcserver/etc/nginx/nginx.conf
+#I3BACKGROUNDGENERATORpage1:OPEN KVM SWITCH IN GOOGLE-CHROME
+bindsym $mod+Ctrl+1 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.11/
+#I3BACKGROUNDGENERATORpage1:OPEN IDRAC HTTP FOR PRIMARY SERVER
+bindsym $mod+Ctrl+2 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.9/
+#I3BACKGROUNDGENERATORpage1:OPEN IDRAC HTTP FOR DRIVE WIPER SERVER
+bindsym $mod+Ctrl+3 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.12:1323/
+#I3BACKGROUNDGENERATORpage1:OPEN IDARAC HTTP FOR DEV SERVER
+bindsym $mod+Ctrl+4 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.14:1223/
+#I3BACKGROUNDGENERATORpage1:OPEN LOCAL CLIENT IN GOOGLE-CHROME
+bindsym $mod+Ctrl+5 exec            	 --no-startup-id google-chrome --new-window https://77.77.77.30/
+#I3BACKGROUNDGENERATORpage1:START GOOGLE-CHROME IN A NEW WINDOW
+bindsym $mod+Ctrl+c exec            	 --no-startup-id google-chrome --new-window
+#I3BACKGROUNDGENERATORpage1:START YOUTUBE IN GOOGLE CHROME
+bindsym $mod+Ctrl+y exec            	 --no-startup-id google-chrome --new-window https://youtube.com
+#I3BACKGROUNDGENERATORpage1:OPEN PAYPAL CREATE SHIPPING LABEL IN GOOGLE CHROME
+bindsym $mod+Ctrl+Shift+q exec      	 --no-startup-id google-chrome --new-window https://www.paypal.com/shiplabel/create/
+#I3BACKGROUNDGENERATORpage1:OPEN ASSANA IN GOOGLE-CHROME
+bindsym $mod+Ctrl+a exec            	 --no-startup-id google-chrome --new-window https://app.asana.com/
+#I3BACKGROUNDGENERATORpage1:OPEN GMAIL IN GOOGLE-CHROME
+bindsym $mod+Ctrl+g exec            	 --no-startup-id google-chrome --new-window https://mail.google.com/mail/u/0/#inbox
+#I3BACKGROUNDGENERATORpage1:OPEN PAYPAL INVOICES IN GOOGLE-CHROME
+bindsym $mod+Ctrl+q exec            	 --no-startup-id google-chrome --new-window https://www.paypal.com/invoice/manage
+#I3BACKGROUNDGENERATORpage1:START VNCVIEWER FOR PRIMARY SERVER 77.77.77.9:5900
+bindsym $alt+Ctrl+1 exec            	 --no-startup-id stterm vncviewer 77.77.77.9:5900
+#I3BACKGROUNDGENERATORpage1:START VNCVIEWER FOR DEV SERVER 1 77.77.77.12:5900
+bindsym $alt+Ctrl+2 exec            	 --no-startup-id stterm vncviewer 77.77.77.12:5900
+#I3BACKGROUNDGENERATORpage1:START VNCVIEWER FOR DEV SERVER 2 77.77.77.14:5900
+bindsym $alt+Ctrl+3 exec            	 --no-startup-id stterm vncviewer 77.77.77.14:5900
 floating_modifier $mod
-bindsym $mod+Return exec            	 --no-startup-id stterm                                                                                                          	 #I3BACKGROUNDGENERATOR:Start terminal with current session user
-bindsym $mod+Shift+Return exec      	 --no-startup-id sudo stterm                                                                                                     	 #I3BACKGROUNDGENERATOR:Start terminal as root user
-bindsym $mod+Ctrl+Shift+Return exec 	 --no-startup-id stterm tmuxp load ~/.tmuxsession.yaml -y                                                                        	 #I3BACKGROUNDGENERATOR:Starts the tmux session launcher
+#I3BACKGROUNDGENERATORpage2:KILL CURRENT WINDOW
 bindsym $mod+Shift+q kill
+#I3BACKGROUNDGENERATORpage2:KILL FOCUS TO THE LEFT
 bindsym $mod+Left focus left
+#I3BACKGROUNDGENERATORpage2:KILL FOCUS DOWN
 bindsym $mod+Down focus down
+#I3BACKGROUNDGENERATORpage2:KILL FOCUS UP
 bindsym $mod+Up focus up
+#I3BACKGROUNDGENERATORpage2:KILL FOCUS TO THE RIGHT
 bindsym $mod+Right focus right
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW LEFT
 bindsym $mod+Shift+Left move left
+#I3BACKGROUNDGENERATORpage2:KILL WINDOW DOWN
 bindsym $mod+Shift+Down move down
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW UP
 bindsym $mod+Shift+Up move up
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO THE RIGHT
 bindsym $mod+Shift+Right move right
+#I3BACKGROUNDGENERATORpage2:SPLIT WINDOWS HORISONTALLY
 bindsym $mod+h split h
+#I3BACKGROUNDGENERATORpage2:SPLIT WINDOWS VERTICALLY
 bindsym $mod+v split v
+#I3BACKGROUNDGENERATORpage2:TOGGLE FULLSCREEN
 bindsym $mod+f fullscreen toggle
+#I3BACKGROUNDGENERATORpage2:TOGGLE STACKING
 bindsym $mod+s layout stacking
+#I3BACKGROUNDGENERATORpage2:TOGGLE TABBED
 bindsym $mod+w layout tabbed
+#I3BACKGROUNDGENERATORpage2:TOGGLE SPLIT
 bindsym $mod+e layout toggle split
+#I3BACKGROUNDGENERATORpage2:TOGGLE FLOATING
 bindsym $mod+Shift+space floating toggle
+#I3BACKGROUNDGENERATORpage2:FOCUS MODE TOGGLE
 bindsym $mod+space focus mode_toggle
+#I3BACKGROUNDGENERATORpage2:FOCUS PARENT
 bindsym $mod+a focus parent
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 1
 bindsym $mod+1 workspace number $ws1
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 2
 bindsym $mod+2 workspace number $ws2
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 3
 bindsym $mod+3 workspace number $ws3
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 4
 bindsym $mod+4 workspace number $ws4
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 5
 bindsym $mod+5 workspace number $ws5
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 6
 bindsym $mod+6 workspace number $ws6
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 7
 bindsym $mod+7 workspace number $ws7
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 8
 bindsym $mod+8 workspace number $ws8
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 9
 bindsym $mod+9 workspace number $ws9
+#I3BACKGROUNDGENERATORpage2:SWITCH TO WORKSPACE 10
 bindsym $mod+0 workspace number $ws10
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 1
 bindsym $mod+Shift+1 move container to workspace number $ws1
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 2
 bindsym $mod+Shift+2 move container to workspace number $ws2
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 3
 bindsym $mod+Shift+3 move container to workspace number $ws3
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 4
 bindsym $mod+Shift+4 move container to workspace number $ws4
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 5
 bindsym $mod+Shift+5 move container to workspace number $ws5
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 6
 bindsym $mod+Shift+6 move container to workspace number $ws6
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 7
 bindsym $mod+Shift+7 move container to workspace number $ws7
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 8
 bindsym $mod+Shift+8 move container to workspace number $ws8
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 9
 bindsym $mod+Shift+9 move container to workspace number $ws9
+#I3BACKGROUNDGENERATORpage2:MOVE WINDOW TO WORKSPACE 10
 bindsym $mod+Shift+0 move container to workspace number $ws10
+#I3BACKGROUNDGENERATORpage2:RELOAD I3 CONFIG
 bindsym $mod+Shift+c reload
+#I3BACKGROUNDGENERATORpage2:RESTART I3
 bindsym $mod+Shift+r restart
+#I3BACKGROUNDGENERATORpage2:EXIT I3
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 mode "resize" {
+#I3BACKGROUNDGENERATORpage2:RESIZE LEFT 10 PX
 bindsym Left resize shrink width 10 px or 10 ppt
+#I3BACKGROUNDGENERATORpage2:RESIZE DOWN 10 PX
 bindsym Down resize grow height 10 px or 10 ppt
+#I3BACKGROUNDGENERATORpage2:RESIZE UP 10 PX
 bindsym Up resize shrink height 10 px or 10 ppt
+#I3BACKGROUNDGENERATORpage2:RESIZE RIGHT 10 PX
 bindsym Right resize grow width 10 px or 10 ppt
+#I3BACKGROUNDGENERATORpage2:EXIT RESIZE MODE
 bindsym Escape mode "default"
 }
+#I3BACKGROUNDGENERATORpage2:ENTER RESIZE MODE
 bindsym $mod+r mode "resize"
 bar {
         status_command i3status
