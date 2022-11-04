@@ -1,0 +1,72 @@
+SCRIPT=$(readlink -f "$0")
+basedir=$(dirname "$SCRIPT")
+mod=win
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+BGblack=$(tput setab 0)
+BGred=$(tput setab 1)
+BGgreen=$(tput setab 2)
+BGyellow=$(tput setab 3)
+BGblue=$(tput setab 4)
+BGmagenta=$(tput setab 5)
+BGcyan=$(tput setab 6)
+BGwhite=$(tput setab 7)
+bold=$(tput bold)
+normal=$(tput sgr0)
+underline=$(tput smul)
+nounderline=$(tput rmul)
+killtput=$(tput -T ansi sgr0)
+filter() {
+grep -v -i "#I3BACKGROUNDGENERATOR" | grep -v "{" | grep -v "}" | tr -d "[=-=]"  | sed 's&bindsym &&gI' | awk '{print $1}'
+}
+sedclean() {
+sed 's/$mod/win/gI' | sed 's/$alt/alt/gI'
+}
+greenit=(restart start move open resize reload update)
+yellowit=(window workspace conf configuration)
+redit=(win stop error fatal crash root)
+blueit=(alt google chrome idrac vncviewer vnc tigervnv)
+cyanit=(return)
+sedcolor() {
+sed 's/win+/'"$bold$red"'win+'"$killtput"'/gI' \
+| sed 's/alt+/'"$bold$blue"'alt+'"$killtput"'/gI' \
+| sed 's/restart/'"$green"'restart'"$killtput"'/gI' \
+| sed 's/start/'"$green"'start'"$killtput"'/gI' \
+| sed 's/toggle/'"$green"'toggle'"$killtput"'/gI' \
+| sed 's/resize/'"$green"'resize'"$killtput"'/gI' \
+| sed 's/reload/'"$green"'reload'"$killtput"'/gI' \
+| sed 's/move/'"$green"'move'"$killtput"'/gI' \
+| sed 's/open/'"$green"'open'"$killtput"'/gI' \
+| sed 's/focus/'"$green"'focus'"$killtput"'/gI' \
+| sed 's/switch/'"$green"'switch'"$killtput"'/gI' \
+| sed 's/launcher/'"$cyan"'launcher'"$killtput"'/gI' \
+| sed 's/edit/'"$yellow"'edit'"$killtput"'/gI' \
+| sed 's/ctrl+/'"$bold$yellow"'ctrl+'"$killtput"'/gI' \
+| sed 's/return/'"$cyan"'return'"$killtput"'/gI' \
+| sed 's/shift/'"$bold$magenta"'shift'"$killtput"'/gI' \
+| sed 's/stop/'"$red"'STOP'"$killtput"'/gI' \
+| sed 's/kill/'"$red"'kill'"$killtput"'/gI' \
+| sed 's/exit/'"$red"'exit'"$killtput"'/gI' \
+| sed 's/root/'"$bold$red"'root'"$killtput"'/gI' \
+| sed 's/server/'"$underline"'server'"$killtput"'/gI' \
+| sed 's/google/'"$bold$blue"'google'"$killtput"'/gI' \
+| sed 's/chrome/'"$bold$blue"'chrome'"$killtput"'/gI' \
+| sed 's/nginx/'"$bold$blue"'nginx'"$killtput"'/gI' \
+| sed 's/zenmap/'"$bold$blue"'zenmap'"$killtput"'/gI' \
+| sed 's/paypal/'"$bold$blue"'paypal'"$killtput"'/gI' \
+| sed 's/ebay/'"$bold$blue"'ebay'"$killtput"'/gI' \
+| sed 's/I3/'"$bold$blue"'I3'"$killtput"'/gI' \
+| sed 's/WINDOW/'"$bold$yellow"'WINDOW'"$killtput"'/gI' \
+| sed 's/WORKSPACE/'"$bold$yellow"'WORKSPACE'"$killtput"'/gI' \
+| sed 's/session/'"$bold$yellow"'SESSION'"$killtput"'/gI' \
+| sed 's/configuration/'"$bold$yellow"'CONFIGURATION'"$killtput"'/gI' \
+| sed 's/conf/'"$bold$yellow"'CONF'"$killtput"'/gI' \
+| sed 's/vncviewer\|vnc/'"$bold$blue"'vncviewer'"$killtput"'/gI' \
+| cat
+}
